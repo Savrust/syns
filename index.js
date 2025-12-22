@@ -1,0 +1,1579 @@
+
+                // Testimonials horizontal scroll functionality
+                document.addEventListener('DOMContentLoaded', function () {
+                    const scrollWrapper = document.querySelector('.testimonials-scroll-wrapper');
+                    const prevButton = document.querySelector('.testimonial-nav-prev');
+                    const nextButton = document.querySelector('.testimonial-nav-next');
+                    const paginationDots = document.querySelectorAll('.pagination-dot');
+                    const cards = scrollWrapper ? scrollWrapper.querySelectorAll('.testimonial-card') : [];
+
+                    if (scrollWrapper && prevButton && nextButton) {
+                        // Function to update active pagination dot
+                        function updateActiveDot() {
+                            if (cards.length === 0 || paginationDots.length === 0) return;
+
+                            const cardWidth = cards[0].offsetWidth;
+                            const gap = 12;
+                            const scrollLeft = scrollWrapper.scrollLeft;
+                            const currentIndex = Math.round(scrollLeft / (cardWidth + gap));
+                            const activeIndex = Math.min(currentIndex, cards.length - 1);
+
+                            paginationDots.forEach((dot, index) => {
+                                if (index === activeIndex) {
+                                    dot.classList.add('active');
+                                } else {
+                                    dot.classList.remove('active');
+                                }
+                            });
+                        }
+
+                        function updateNavVisibility() {
+                            if (!scrollWrapper || !prevButton || !nextButton) return;
+                            const maxScroll = scrollWrapper.scrollWidth - scrollWrapper.clientWidth;
+                            const atStart = scrollWrapper.scrollLeft <= 1;
+                            const atEnd = scrollWrapper.scrollLeft >= maxScroll - 1;
+                            prevButton.classList.toggle('is-hidden', atStart);
+                            nextButton.classList.toggle('is-hidden', atEnd);
+                        }
+
+                        // Function to scroll to a specific card
+                        function scrollToCard(index) {
+                            if (cards.length === 0) return;
+                            const cardWidth = cards[0].offsetWidth;
+                            const gap = 12;
+                            const scrollAmount = index * (cardWidth + gap);
+
+                            scrollWrapper.scrollTo({
+                                left: scrollAmount,
+                                behavior: 'smooth'
+                            });
+                        }
+
+                        // Make pagination dots clickable
+                        paginationDots.forEach((dot, index) => {
+                            dot.addEventListener('click', function () {
+                                scrollToCard(index);
+                            });
+                        });
+
+                        // Update pagination on scroll
+                        scrollWrapper.addEventListener('scroll', () => {
+                            updateActiveDot();
+                            updateNavVisibility();
+                        });
+
+                        // Update pagination after smooth scroll completes
+                        scrollWrapper.addEventListener('scrollend', () => {
+                            updateActiveDot();
+                            updateNavVisibility();
+                        });
+
+                        function scrollToNext() {
+                            const cardWidth = cards[0].offsetWidth;
+                            const gap = 12;
+                            const scrollAmount = cardWidth + gap;
+
+                            scrollWrapper.scrollBy({
+                                left: scrollAmount,
+                                behavior: 'smooth'
+                            });
+                        }
+
+                        function scrollToPrev() {
+                            const cardWidth = cards[0].offsetWidth;
+                            const gap = 12;
+                            const scrollAmount = cardWidth + gap;
+
+                            scrollWrapper.scrollBy({
+                                left: -scrollAmount,
+                                behavior: 'smooth'
+                            });
+                        }
+
+                        nextButton.addEventListener('click', scrollToNext);
+                        prevButton.addEventListener('click', scrollToPrev);
+
+                        // Initial update
+                        updateActiveDot();
+                        updateNavVisibility();
+                    }
+                });
+
+                // Income List click functionality
+                document.addEventListener('DOMContentLoaded', function () {
+                    const incomeItems = document.querySelectorAll('.income-item');
+                    let currentActiveContainer = null;
+
+                    // 各所得額に対応するデータ
+                    const incomeData = {
+                        '400': {
+                            simulation: {
+                                deduction: 124,
+                                totalDeduction: 136
+                            },
+                            comparison1: {
+                                header: '不動産1件所有/家賃収入14.84万円',
+                                beforeTax: 140,
+                                afterTax: 4.8,
+                                realEstateIncome: -135.2,
+                                rentIncome: 14.84,
+                                expenses: 150.03,
+                                beforeTaxTotal: 26.14,
+                                afterTaxTotal: 5.72,
+                                savings: 20.42
+                            },
+                            comparison2: {
+                                header: '不動産 13件所有 / 家賃収入 185.24万円',
+                                beforeTax: 1860,
+                                afterTax: 96,
+                                realEstateIncome: -1762,
+                                rentIncome: 185,
+                                expenses: 1947,
+                                beforeTaxTotal: 660,
+                                afterTaxTotal: 16,
+                                savings: 644
+                            }
+                        },
+                        '600': {
+                            simulation: {
+                                deduction: 140,
+                                totalDeduction: 140
+                            },
+                            comparison1: {
+                                header: '不動産1件所有/家賃収入14.84万円',
+                                beforeTax: 296,
+                                afterTax: 167.8,
+                                realEstateIncome: -128.16,
+                                rentIncome: 14.84,
+                                expenses: 143,
+                                beforeTaxTotal: 52.86,
+                                afterTaxTotal: 28.34,
+                                savings: 24.52
+                            },
+                            comparison2: {
+                                header: '不動産 13件所有 / 家賃収入 185.24万円',
+                                beforeTax: 296,
+                                afterTax: 35.6,
+                                realEstateIncome: -260.4,
+                                rentIncome: 32.92,
+                                expenses: 293.32,
+                                beforeTaxTotal: 52.86,
+                                afterTaxTotal: 8.37,
+                                savings: 44.49
+                            }
+                        },
+                        '800': {
+                            simulation: {
+                                deduction: 190,
+                                totalDeduction: 159
+                            },
+                            comparison1: {
+                                header: '不動産1件所有/家賃収入14.84万円',
+                                beforeTax: 451,
+                                afterTax: 322.8,
+                                realEstateIncome: -128.16,
+                                rentIncome: 14.84,
+                                expenses: 143,
+                                beforeTaxTotal: 96.04,
+                                afterTaxTotal: 57.78,
+                                savings: 38.26
+                            },
+                            comparison2: {
+                                header: '不動産 13件所有 / 家賃収入 185.24万円',
+                                beforeTax: 451,
+                                afterTax: 43.1,
+                                realEstateIncome: -407.89,
+                                rentIncome: 44.51,
+                                expenses: 452.39,
+                                beforeTaxTotal: 96.04,
+                                afterTaxTotal: 9.01,
+                                savings: 87.03
+                            }
+                        },
+                        '1200': {
+                            simulation: {
+                                deduction: 202,
+                                totalDeduction: 202
+                            },
+                            comparison1: {
+                                header: '不動産1件所有/家賃収入14.84万円',
+                                beforeTax: 803,
+                                afterTax: 674.8,
+                                realEstateIncome: -128.16,
+                                rentIncome: 14.84,
+                                expenses: 143,
+                                beforeTaxTotal: 205.9,
+                                afterTaxTotal: 163.62,
+                                savings: 42.31
+                            },
+                            comparison2: {
+                                header: '不動産 13件所有 / 家賃収入 185.24万円',
+                                beforeTax: 803,
+                                afterTax: 0.7,
+                                realEstateIncome: -802.27,
+                                rentIncome: 82.51,
+                                expenses: 884.78,
+                                beforeTaxTotal: 205.93,
+                                afterTaxTotal: 2.1,
+                                savings: 203.83
+                            }
+                        },
+                        '2400': {
+                            simulation: {
+                                deduction: 195,
+                                totalDeduction: 346
+                            },
+                            comparison1: {
+                                header: '不動産1件所有/家賃収入14.84万円',
+                                beforeTax: 1860,
+                                afterTax: 1730,
+                                realEstateIncome: -128,
+                                rentIncome: 14,
+                                expenses: 143,
+                                beforeTaxTotal: 660,
+                                afterTaxTotal: 600,
+                                savings: 60
+                            },
+                            comparison2: {
+                                header: '不動産 13件所有 / 家賃収入 185.24万円',
+                                beforeTax: 1860,
+                                afterTax: 96,
+                                realEstateIncome: -1762,
+                                rentIncome: 185,
+                                expenses: 1947,
+                                beforeTaxTotal: 660,
+                                afterTaxTotal: 16,
+                                savings: 644
+                            }
+                        }
+                    };
+
+                    // データを表示するコンテナを作成する関数
+                    function createDataContainer(data, incomeItem, incomeKey) {
+                        // 既存のコンテナを削除
+                        if (currentActiveContainer) {
+                            currentActiveContainer.remove();
+                            currentActiveContainer = null;
+                        }
+
+                        // 新しいコンテナを作成
+                        const container = document.createElement('div');
+                        container.className = 'income-item-details-container';
+
+                        // simulation-results セクションを作成
+                        const simulationResults = document.createElement('div');
+                        simulationResults.className = 'simulation-results';
+                        simulationResults.innerHTML = `
+                            <h3 class="results-title">物件購入後の比較・節税額シミュレーション</h3>
+                            <div class="fixed-table">
+                                <div class="fixed-table-item">
+                                    <span>給与所得控除額</span>
+                                    <span class="fixed-table-item-value">
+                                        約<span class="fixed-table-item-value-number">${data.simulation.deduction}</span>万円
+                                    </span>
+                                </div>
+                                <div class="fixed-table-item fixed-table-item-after">
+                                    <span>各種控除額合計</span>
+                                    <span class="fixed-table-item-value">
+                                        約<span class="fixed-table-item-value-number">${data.simulation.totalDeduction}</span>万円
+                                    </span>
+                                </div>
+                            </div>
+                        `;
+
+                        // comparison-table-section pb-0 を作成
+                        const comparisonSection1 = document.createElement('div');
+                        comparisonSection1.className = 'comparison-table-section pb-0';
+                        comparisonSection1.innerHTML = `
+                            <div class="comparison-table-content">
+                                <div class="comparison-header">
+                                    <div class="header-square"></div>
+                                    <p class="header-text">${data.comparison1.header}</p>
+                                </div>
+                                <div class="comparison-table mb-0">
+                                    <div class="table-row">
+                                        <div class="table-label">課税対象額</div>
+                                        <div class="table-cell">
+                                            <div class="cell-label cell-title"><span class="auto">購入前</span></div>
+                                            <div class="cell-value"><span class="cell-uint">約 </span>${data.comparison1.beforeTax}<span class="cell-uint">万円</span></div>
+                                        </div>
+                                        <div class="table-cell cell-after">
+                                            <div class="cell-label cell-title"><span class="auto">購入後</span></div>
+                                            <div class="cell-value"><span class="cell-uint">約 </span>${data.comparison1.afterTax}<span class="cell-uint">万円</span></div>
+                                            <div class="cell-breakdown">
+                                                <div class="breakdown-item">
+                                                    <span class="breakdown-label">不動産所得</span>
+                                                    <span class="breakdown-yaku">約</span>
+                                                    <span class="breakdown-value">${data.comparison1.realEstateIncome}万円</span>
+                                                </div>
+                                                <div class="breakdown-item">
+                                                    <span class="breakdown-label">家賃収入</span>
+                                                    <span class="breakdown-yaku">約</span>
+                                                    <span class="breakdown-value">${data.comparison1.rentIncome}万円</span>
+                                                </div>
+                                                <div class="breakdown-item">
+                                                    <span class="breakdown-label">経費</span>
+                                                    <span class="breakdown-yaku">約</span>
+                                                    <span class="breakdown-value">${data.comparison1.expenses}万円</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-separator">
+                                    <div class="table-separator">
+                                        <div class="table-separator-diresction"></div>
+                                    </div>
+                                </div>
+                                <div class="comparison-table">
+                                    <div class="table-row">
+                                        <div class="table-label">所得税 住民税 合計</div>
+                                        <div class="table-cell">
+                                            <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison1.beforeTaxTotal}<span class="cell-uint">万円</span></div>
+                                        </div>
+                                        <div class="table-cell cell-after">
+                                            <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison1.afterTaxTotal}<span class="cell-uint">万円</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comparison-conclusion">
+                                    <div class="conclusion-box-large">
+                                        <p>不動産確定申告後 <span class="savings-amount">約<span class="savings-amount-number">${data.comparison1.savings}</span>万円</span><span class="savings-amount-text">大幅節税!</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        // コンテナに追加
+                        container.appendChild(simulationResults);
+                        container.appendChild(comparisonSection1);
+
+                        // 400万円の場合はcomparison-table-section (2つ目) を表示しない
+                        if (incomeKey !== '400') {
+                            // comparison-table-section (2つ目) を作成
+                            const comparisonSection2 = document.createElement('div');
+                            comparisonSection2.className = 'comparison-table-section';
+                            comparisonSection2.innerHTML = `
+                                <div class="comparison-table-content">
+                                    <div class="comparison-header">
+                                        <div class="header-square"></div>
+                                        <p class="header-text">${data.comparison2.header}</p>
+                                    </div>
+                                    <div class="comparison-table mb-0">
+                                        <div class="table-row">
+                                            <div class="table-label">課税対象額</div>
+                                            <div class="table-cell">
+                                                <div class="cell-label cell-title"><span class="auto">購入前</span></div>
+                                                <div class="cell-value"><span class="cell-uint">約 </span>${data.comparison2.beforeTax}<span class="cell-uint">万円</span></div>
+                                            </div>
+                                            <div class="table-cell cell-after">
+                                                <div class="cell-label cell-title"><span class="auto">購入後</span></div>
+                                                <div class="cell-value"><span class="cell-uint">約 </span>${data.comparison2.afterTax}<span class="cell-uint">万円</span></div>
+                                                <div class="cell-breakdown">
+                                                    <div class="breakdown-item">
+                                                        <span class="breakdown-label">不動産所得</span>
+                                                        <span class="breakdown-yaku">約</span>
+                                                        <span class="breakdown-value">${data.comparison2.realEstateIncome} 万円</span>
+                                                    </div>
+                                                    <div class="breakdown-item">
+                                                        <span class="breakdown-label">家賃収入</span>
+                                                        <span class="breakdown-yaku">約</span>
+                                                        <span class="breakdown-value">${data.comparison2.rentIncome} 万円</span>
+                                                    </div>
+                                                    <div class="breakdown-item">
+                                                        <span class="breakdown-label">経費</span>
+                                                        <span class="breakdown-yaku">約</span>
+                                                        <span class="breakdown-value">${data.comparison2.expenses} 万円</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-separator">
+                                        <div class="table-separator-diresction"></div>
+                                    </div>
+                                    <div class="comparison-table">
+                                        <div class="table-row">
+                                            <div class="table-label">所得税 住民税 合計</div>
+                                            <div class="table-cell">
+                                                <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison2.beforeTaxTotal}<span class="cell-uint">万円</span></div>
+                                            </div>
+                                            <div class="table-cell cell-after">
+                                                <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison2.afterTaxTotal}<span class="cell-uint">万円</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="comparison-conclusion">
+                                        <div class="conclusion-box-large">
+                                            <p>不動産確定申告後 <span class="savings-amount">約<span class="savings-amount-number">${data.comparison2.savings}</span>万円</span><span class="savings-amount-text">大幅節税!</span></p>
+                                        </div>
+                                    </div>
+                                    <p class="comparison-disclaimer">※数字は概算のため実際の数字とは異なる場合があります</p>
+                                </div>
+                            `;
+                            container.appendChild(comparisonSection2);
+                        }
+
+                        // income-itemの後に挿入
+                        incomeItem.parentNode.insertBefore(container, incomeItem.nextSibling);
+                        currentActiveContainer = container;
+                    }
+
+                    // 各income-itemにクリックイベントを追加
+                    incomeItems.forEach((item, index) => {
+                        const toggleButton = item.querySelector('.income-toggle');
+                        const incomeAmount = item.querySelector('.income-amount');
+                        
+                        if (toggleButton && incomeAmount) {
+                            // 所得額からキーを取得（"400万円" -> "400", "1,200万円" -> "1200"）
+                            const amountText = incomeAmount.textContent.trim();
+                            const incomeKey = amountText.replace(/[万円,]/g, '').replace(/\s/g, '');
+
+                            toggleButton.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                e.stopPropagation();
+
+                                const data = incomeData[incomeKey];
+                                if (!data) return;
+
+                                // 既にアクティブな場合は閉じる
+                                if (item.classList.contains('income-item-active')) {
+                                    item.classList.remove('income-item-active');
+                                    const icon = item.querySelector('.toggle-icon');
+                                    if (icon) {
+                                        icon.classList.remove('toggle-icon-minus');
+                                        icon.innerHTML = '<path d="M12 6v12M6 12h12" stroke="#2d5a3d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />';
+                                    }
+                                    if (currentActiveContainer) {
+                                        currentActiveContainer.remove();
+                                        currentActiveContainer = null;
+                                    }
+                                    return;
+                                }
+
+                                // アクティブ状態を更新
+                                incomeItems.forEach(i => {
+                                    i.classList.remove('income-item-active');
+                                    const icon = i.querySelector('.toggle-icon');
+                                    if (icon) {
+                                        icon.classList.remove('toggle-icon-minus');
+                                        icon.innerHTML = '<path d="M12 6v12M6 12h12" stroke="#2d5a3d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />';
+                                    }
+                                });
+                                item.classList.add('income-item-active');
+
+                                // アイコンを更新
+                                const currentIcon = item.querySelector('.toggle-icon');
+                                if (currentIcon) {
+                                    currentIcon.classList.add('toggle-icon-minus');
+                                    currentIcon.innerHTML = '<path d="M6 12h12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />';
+                                }
+
+                                // データを表示
+                                createDataContainer(data, item, incomeKey);
+                            });
+
+                            // アイテム全体をクリック可能にする
+                            item.addEventListener('click', function(e) {
+                                if (e.target !== toggleButton && !toggleButton.contains(e.target)) {
+                                    toggleButton.click();
+                                }
+                            });
+                        }
+                    });
+
+                });
+
+                // Strengths Stats horizontal scroll functionality
+                document.addEventListener('DOMContentLoaded', function () {
+                    const statsScrollWrapper = document.querySelector('.strengths-stats-scroll-wrapper');
+                    const statsPrevButton = document.querySelector('.stats-nav-prev');
+                    const statsNextButton = document.querySelector('.stats-nav-next');
+                    
+                    // Get all scrollable children (both stats-box and property-details-content)
+                    const scrollableItems = statsScrollWrapper ? Array.from(statsScrollWrapper.children) : [];
+
+                    if (statsScrollWrapper && statsPrevButton && statsNextButton) {
+                        function updateStatsNavVisibility() {
+                            if (!statsScrollWrapper || !statsPrevButton || !statsNextButton) return;
+                            const maxScroll = statsScrollWrapper.scrollWidth - statsScrollWrapper.clientWidth;
+                            const atStart = statsScrollWrapper.scrollLeft <= 1;
+                            const atEnd = statsScrollWrapper.scrollLeft >= maxScroll - 1;
+                            statsPrevButton.classList.toggle('is-hidden', atStart);
+                            statsNextButton.classList.toggle('is-hidden', atEnd);
+                        }
+
+                        function scrollToItem(index) {
+                            if (scrollableItems.length === 0 || index < 0 || index >= scrollableItems.length) return;
+                            
+                            const targetItem = scrollableItems[index];
+                            const itemLeft = targetItem.offsetLeft;
+
+                            statsScrollWrapper.scrollTo({
+                                left: itemLeft,
+                                behavior: 'smooth'
+                            });
+                        }
+
+                        function getCurrentIndex() {
+                            if (scrollableItems.length === 0) return 0;
+                            
+                            // If at the very start, return 0
+                            if (statsScrollWrapper.scrollLeft <= 5) return 0;
+                            
+                            // Find which item is currently most visible in the viewport
+                            const wrapperRect = statsScrollWrapper.getBoundingClientRect();
+                            const wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
+                            
+                            let closestIndex = 0;
+                            let closestDistance = Infinity;
+                            
+                            scrollableItems.forEach((item, index) => {
+                                const itemRect = item.getBoundingClientRect();
+                                const itemCenter = itemRect.left + itemRect.width / 2;
+                                const distance = Math.abs(wrapperCenter - itemCenter);
+                                
+                                // Also check if the item is at least partially visible
+                                const isVisible = itemRect.right > wrapperRect.left && itemRect.left < wrapperRect.right;
+                                
+                                if (isVisible && distance < closestDistance) {
+                                    closestDistance = distance;
+                                    closestIndex = index;
+                                }
+                            });
+                            
+                            // Fallback: if no visible item found, use scroll position
+                            if (closestDistance === Infinity) {
+                                const scrollLeft = statsScrollWrapper.scrollLeft;
+                                const firstItemWidth = scrollableItems[0]?.offsetWidth || 0;
+                                const gap = 12;
+                                return Math.min(Math.round(scrollLeft / (firstItemWidth + gap)), scrollableItems.length - 1);
+                            }
+                            
+                            return closestIndex;
+                        }
+
+                        function updateContentAnimation(index, direction) {
+                            const targetItem = scrollableItems[index];
+                            if (!targetItem) return;
+                            
+                            // Remove animation classes from all items
+                            scrollableItems.forEach(item => {
+                                item.classList.remove('slide-from-right', 'slide-from-left');
+                            });
+                            
+                            // Add animation to target item if it's a property details content
+                            if (direction && targetItem.classList.contains('stats-property-details-content')) {
+                                void targetItem.offsetWidth; // Force reflow
+                                if (direction === 'next') {
+                                    targetItem.classList.add('slide-from-right');
+                                } else if (direction === 'prev') {
+                                    targetItem.classList.add('slide-from-left');
+                                }
+                            }
+                        }
+
+                        // Update navigation visibility on scroll
+                        statsScrollWrapper.addEventListener('scroll', () => {
+                            updateStatsNavVisibility();
+                        });
+
+                        statsScrollWrapper.addEventListener('scrollend', () => {
+                            updateStatsNavVisibility();
+                        });
+
+                        function scrollToNext() {
+                            if (scrollableItems.length === 0) return;
+                            
+                            const currentIndex = getCurrentIndex();
+                            const nextIndex = Math.min(currentIndex + 1, scrollableItems.length - 1);
+                            
+                            // Don't do anything if already at the last item
+                            if (nextIndex === currentIndex) return;
+
+                            // Remove any existing animations
+                            scrollableItems.forEach(item => {
+                                item.classList.remove('slide-from-right', 'slide-from-left');
+                            });
+
+                            // Scroll directly to the target item (smooth scroll provides the visual feedback)
+                            scrollToItem(nextIndex);
+                        }
+
+                        function scrollToPrev() {
+                            if (scrollableItems.length === 0) return;
+                            
+                            const currentIndex = getCurrentIndex();
+                            const prevIndex = Math.max(currentIndex - 1, 0);
+                            
+                            // Don't do anything if already at the first item
+                            if (prevIndex === currentIndex) return;
+
+                            // Remove any existing animations
+                            scrollableItems.forEach(item => {
+                                item.classList.remove('slide-from-right', 'slide-from-left');
+                            });
+
+                            // Scroll directly to the target item (smooth scroll provides the visual feedback)
+                            scrollToItem(prevIndex);
+                        }
+
+                        statsNextButton.addEventListener('click', scrollToNext);
+                        statsPrevButton.addEventListener('click', scrollToPrev);
+
+                        // Initial update
+                        updateStatsNavVisibility();
+                    }
+                });
+
+                // Scroll-triggered animation for the reasons block
+                const reasonsContents = document.querySelectorAll('.reasons-content');
+                if (reasonsContents.length) {
+                    if (!('IntersectionObserver' in window)) {
+                        reasonsContents.forEach((content) => content.classList.add('reasons-visible'));
+                    } else {
+                        const reasonsObserver = new IntersectionObserver(
+                            (entries) => {
+                                entries.forEach((entry) => {
+                                    if (entry.isIntersecting) {
+                                        entry.target.classList.add('reasons-visible');
+                                    } else {
+                                        entry.target.classList.remove('reasons-visible');
+                                    }
+                                });
+                            },
+                            { threshold: 0.2 }
+                        );
+
+                        reasonsContents.forEach((content) => reasonsObserver.observe(content));
+                    }
+                }
+
+                // Generic scroll reveal for sections without existing scroll animations
+                const scrollRevealEls = document.querySelectorAll('[data-scroll-reveal], .scroll-reveal');
+                if (scrollRevealEls.length) {
+                    if (!('IntersectionObserver' in window)) {
+                        scrollRevealEls.forEach((el) => el.classList.add('is-visible'));
+                    } else {
+                        const revealObserver = new IntersectionObserver(
+                            (entries) => {
+                                entries.forEach((entry) => {
+                                    if (entry.isIntersecting) {
+                                        entry.target.classList.add('is-visible');
+                                        // Special drop animation for the red banner text
+                                        if (entry.target.classList.contains('fukuoka-promo-section')) {
+                                            const bannerRed = entry.target.querySelector('.banner-text-red');
+                                            if (bannerRed) {
+                                                bannerRed.classList.remove('animate-drop');
+                                                // Force reflow so animation can restart
+                                                // eslint-disable-next-line no-unused-expressions
+                                                bannerRed.offsetWidth;
+                                                bannerRed.classList.add('animate-drop');
+                                            }
+                                        }
+                                    } else {
+                                        entry.target.classList.remove('is-visible');
+                                    }
+                                });
+                            },
+                            { threshold: 0.18 }
+                        );
+                        scrollRevealEls.forEach((el) => revealObserver.observe(el));
+                    }
+                }
+
+                // Number counting animation
+                function animateNumber(element, target, duration = 900) {
+                    const start = 0;
+                    const increment = target / (duration / 16); // 60fps
+                    let current = start;
+                    const isInteger = Number.isInteger(target);
+
+                    const updateNumber = () => {
+                        current += increment;
+                        if (current < target) {
+                            element.textContent = isInteger ? Math.floor(current).toLocaleString() : current.toFixed(0);
+                            requestAnimationFrame(updateNumber);
+                        } else {
+                            element.textContent = isInteger ? target.toLocaleString() : target.toFixed(0);
+                        }
+                    };
+
+                    requestAnimationFrame(updateNumber);
+                }
+
+                // Count-up for values that include units/symbols in their text
+                function animateNumericText(element, duration = 900) {
+                    const currentText = element.textContent.trim();
+
+                    // Prefer explicit target if provided (for example: rate-value should always end at 93.64)
+                    const dataTarget = element.getAttribute('data-target');
+                    const cleaned = (dataTarget ?? currentText).replace(/,/g, '');
+                    const match = cleaned.match(/([\d.]+)/);
+                    if (!match) return;
+
+                    const numberPart = match[1];
+                    const suffix = currentText.slice(currentText.indexOf(numberPart) + numberPart.length);
+                    const decimals = (numberPart.split('.')[1] || '').length;
+                    const target = parseFloat(numberPart);
+                    if (!isFinite(target)) return;
+
+                    const start = performance.now();
+
+                    // Explicitly set starting display to 0 + suffix for integer values
+                    if (decimals === 0) {
+                        const startText = '0' + suffix;
+                        element.textContent = startText;
+                    }
+
+                    function frame(now) {
+                        const progress = Math.min((now - start) / duration, 1);
+                        const current = target * progress;
+
+                        if (decimals > 0) {
+                            element.textContent = current.toFixed(decimals) + suffix;
+                        } else {
+                            const intValue = Math.round(current);
+                            if (element.classList.contains('total-amount')) {
+                                element.textContent = intValue.toString() + suffix;
+                            } else {
+                                element.textContent = intValue.toLocaleString() + suffix;
+                            }
+                        }
+
+                        if (progress < 1) {
+                            requestAnimationFrame(frame);
+                        }
+                    }
+
+                    requestAnimationFrame(frame);
+                }
+
+                // Scroll-triggered count-up for key numeric stats (every time they enter viewport)
+                (function () {
+                    const numberEls = document.querySelectorAll(
+                        '.rate-value, .total-amount, .stat-int, .stat-frac, .vacancy-days-value'
+                    );
+                    if (!numberEls.length) return;
+
+                    if (!('IntersectionObserver' in window)) {
+                        numberEls.forEach((el) => animateNumericText(el, 1000));
+                        return;
+                    }
+
+                    const observer = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    animateNumericText(entry.target, 1000);
+
+                                    // Trigger up-arrow arc animation in the same stats box
+                                    const statsBox = entry.target.closest('.strengths-stats-box');
+                                    const arrow = statsBox ? statsBox.querySelector('.up-arrow-image') : null;
+                                    if (arrow) {
+                                        arrow.classList.remove('arc-animate');
+                                        // Force reflow so animation can restart
+                                        // eslint-disable-next-line no-unused-expressions
+                                        arrow.offsetWidth;
+                                        arrow.classList.add('arc-animate');
+                                    }
+                                }
+                            });
+                        },
+                        { threshold: 0.3 }
+                    );
+
+                    numberEls.forEach((el) => observer.observe(el));
+                })();
+
+                // Sequential fade-in for guarantee numbers
+                (function () {
+                    const guaranteeSection = document.querySelector('.guarantee-section');
+                    if (!guaranteeSection) return;
+
+                    const numbers = guaranteeSection.querySelectorAll('.guarantee-number');
+                    if (!numbers.length) return;
+
+                    function setVisibility(visible) {
+                        numbers.forEach((el) => el.classList.toggle('is-visible', visible));
+                    }
+
+                    if (!('IntersectionObserver' in window)) {
+                        setVisibility(true);
+                        return;
+                    }
+
+                    const observer = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    numbers.forEach((el, index) => {
+                                        el.classList.remove('is-visible');
+                                        setTimeout(() => el.classList.add('is-visible'), index * 150);
+                                    });
+                                } else {
+                                    setVisibility(false);
+                                }
+                            });
+                        },
+                        { threshold: 0.3 }
+                    );
+
+                    observer.observe(guaranteeSection);
+                })();
+
+                // Slide-in animation for promo plus and right building
+                (function () {
+                    const promoIllustration = document.querySelector('.properties-illustration');
+                    if (!promoIllustration) return;
+
+                    const slideTargets = promoIllustration.querySelectorAll('.plus-container, .property-building.building-right');
+                    if (!slideTargets.length) return;
+
+                    function setVisible(visible) {
+                        slideTargets.forEach((el) => el.classList.toggle('promo-visible', visible));
+                    }
+
+                    if (!('IntersectionObserver' in window)) {
+                        setVisible(true);
+                        return;
+                    }
+
+                    const observer = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    setVisible(true);
+                                } else {
+                                    setVisible(false);
+                                }
+                            });
+                        },
+                        { threshold: 0.25 }
+                    );
+
+                    observer.observe(promoIllustration);
+                })();
+
+                // Sequential fade-in for bank icons (first 4)
+                (function () {
+                    const bankRow = document.querySelector('.bank-icons-row');
+                    if (!bankRow) return;
+
+                    const bankIcons = bankRow.querySelectorAll('.bank-icon');
+                    if (!bankIcons.length) return;
+
+                    function setVisible(visible) {
+                        bankIcons.forEach((el) => el.classList.toggle('bank-visible', visible));
+                    }
+
+                    if (!('IntersectionObserver' in window)) {
+                        setVisible(true);
+                        return;
+                    }
+
+                    const observer = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    bankIcons.forEach((el, index) => {
+                                        el.classList.remove('bank-visible');
+                                        setTimeout(() => el.classList.add('bank-visible'), index * 150);
+                                    });
+                                } else {
+                                    setVisible(false);
+                                }
+                            });
+                        },
+                        { threshold: 0.3 }
+                    );
+
+                    observer.observe(bankRow);
+                })();
+
+        // Scroll-triggered count up for chart bar values (0 -> bar-value)
+        (function () {
+            const barWrappers = document.querySelectorAll('.chart-bars-right .bar-wrapper');
+            if (!barWrappers.length) return;
+
+            // Initialize data-target for each bar-value
+            barWrappers.forEach((wrapper) => {
+                const valueEl = wrapper.querySelector('.bar-value');
+                if (!valueEl) return;
+                const raw = valueEl.textContent.replace(/,/g, '').trim();
+                if (raw && !valueEl.getAttribute('data-target')) {
+                    valueEl.setAttribute('data-target', raw);
+                }
+            });
+
+            function startBarCount(wrapper) {
+                const valueEl = wrapper.querySelector('.bar-value');
+                if (!valueEl) return;
+                const rawTarget =
+                    valueEl.getAttribute('data-target') ||
+                    valueEl.getAttribute('data-original') ||
+                    valueEl.textContent.replace(/,/g, '').trim();
+                const target = Number(rawTarget);
+                if (!Number.isFinite(target) || target <= 0) return;
+
+                // Reset to 0 then animate to target
+                valueEl.textContent = '0';
+                animateNumber(valueEl, target, 900);
+            }
+
+            if (!('IntersectionObserver' in window)) {
+                barWrappers.forEach((wrapper) => startBarCount(wrapper));
+                return;
+            }
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            startBarCount(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.6 }
+            );
+
+            barWrappers.forEach((wrapper) => observer.observe(wrapper));
+        })();
+
+                // Dynamically size chart bars based on their values and axis positions
+                function calculateBarWidths(animate = false) {
+                    const barWrappers = Array.from(document.querySelectorAll('.chart-bars-right .bar-wrapper'));
+                    if (!barWrappers.length) return;
+
+                    // Get all axis elements
+                    const axisPrimary = document.querySelector('.chart-axis'); // x = 0
+                    const axisDotted1 = document.querySelector('.axis-dotted-1'); // x = 50,000
+                    const axisDotted2 = document.querySelector('.axis-dotted-2'); // x = 60,000
+                    const axisDotted3 = document.querySelector('.axis-dotted-3'); // x = 70,000
+
+                    if (!axisPrimary || !axisDotted3) return;
+
+                    // Get actual computed positions relative to the parent container
+                    const chartBarsRight = document.querySelector('.chart-bars-right');
+                    if (!chartBarsRight) return;
+
+                    const containerRect = chartBarsRight.getBoundingClientRect();
+                    const primaryRect = axisPrimary.getBoundingClientRect();
+                    const firstRect = axisDotted1 ? axisDotted1.getBoundingClientRect() : null;
+                    const secondRect = axisDotted2 ? axisDotted2.getBoundingClientRect() : null;
+                    const thirdRect = axisDotted3.getBoundingClientRect();
+
+                    // Calculate positions relative to the container
+                    // chart-axis is at x = 0 (the y-axis/starting point)
+                    const axis0Position = primaryRect.left - containerRect.left;
+                    // axis-dotted-1 is at x = 50,000
+                    const axis50000Position = firstRect ? firstRect.left - containerRect.left : null;
+                    // axis-dotted-2 is at x = 60,000
+                    const axis60000Position = secondRect ? secondRect.left - containerRect.left : null;
+                    // axis-dotted-3 is at x = 70,000
+                    const axis70000Position = thirdRect.left - containerRect.left;
+
+                    // Calculate the distance from x=0 to x=70,000
+                    const distanceTo70000 = axis70000Position - axis0Position;
+
+                    // Scale: pixels per unit value
+                    // At axis-dotted-3, we have 70,000 units, so:
+                    const pxPerUnit = distanceTo70000 / 70000;
+
+                    // Extract all bar values and store original "standard" values
+                    const values = barWrappers.map(wrapper => {
+                        const bar = wrapper.querySelector('.bar');
+                        const valueEl = wrapper.querySelector('.bar-value');
+                        
+                        // Prefer data-value attribute on bar element for explicit value
+                        if (bar && bar.hasAttribute('data-value')) {
+                            const barValue = Number(bar.getAttribute('data-value'));
+                            if (Number.isFinite(barValue) && barValue > 0) {
+                                return barValue;
+                            }
+                        }
+                        
+                        if (!valueEl) return 0;
+
+                        // Prefer the original value if we've stored it before
+                        const stored = valueEl.getAttribute('data-original');
+                        const sourceText = stored ?? valueEl.textContent;
+                        const raw = sourceText.replace(/,/g, '').trim();
+                        const num = Number(raw);
+
+                        // On first run, capture the original numeric value so
+                        // later recalculations don't depend on animated text.
+                        if (!stored && Number.isFinite(num) && num > 0) {
+                            valueEl.setAttribute('data-original', raw);
+                        }
+
+                        return Number.isFinite(num) ? num : 0;
+                    });
+
+                    // Calculate bar widths based on their values relative to the graph scale
+                    // Bar length = (barValue / 70000) * distanceTo70000
+                    // First, measure all value text widths to find the maximum
+                    const valueWidths = [];
+                    const valueLeftPosition = axis70000Position - axis0Position;
+                    
+                    barWrappers.forEach((wrapper) => {
+                        const valueEl = wrapper.querySelector('.bar-value');
+                        if (valueEl) {
+                            const originalValue =
+                                valueEl.getAttribute('data-original') || valueEl.textContent.replace(/,/g, '');
+                            const tempSpan = document.createElement('span');
+                            tempSpan.style.visibility = 'hidden';
+                            tempSpan.style.position = 'absolute';
+                            tempSpan.style.fontSize = getComputedStyle(valueEl).fontSize;
+                            tempSpan.textContent = originalValue;
+                            document.body.appendChild(tempSpan);
+                            valueWidths.push(tempSpan.offsetWidth);
+                            document.body.removeChild(tempSpan);
+                        } else {
+                            valueWidths.push(0);
+                        }
+                    });
+                    
+                    // Find the maximum value text width to ensure all wrappers have the same width
+                    const maxValueWidth = Math.max(...valueWidths, 0);
+                    
+                    // Calculate uniform wrapper width: axis-dotted-3 position + gap + max value width
+                    const uniformWrapperWidth = valueLeftPosition + 8 + maxValueWidth;
+                    
+                    // Extend bars to include the value text area (red highlighted area)
+                    // Calculate bar widths based on bar-value and corresponding chart-axis-label values
+                    barWrappers.forEach((wrapper, index) => {
+                        const bar = wrapper.querySelector('.bar');
+                        const valueEl = wrapper.querySelector('.bar-value');
+                        const currentValue = values[index] || 0;
+                        
+                        // Get chart-axis-label values for reference (static values from HTML)
+                        const axisLabel50000 = 50000;
+                        const axisLabel60000 = 60000;
+                        const axisLabel70000 = 70000;
+                        
+                        const minWidthPx = 8; // Minimum bar width
+                        let barWidthPx = minWidthPx;
+                        
+                        // Determine bar width based on bar-value relative to chart-axis-label values
+                        // Use the bar-value to find the corresponding chart-axis-label and set static length
+                        if (axis50000Position !== null && axis60000Position !== null && axis70000Position !== null) {
+                            // Calculate axis positions relative to axis-0
+                            const axis50000Width = axis50000Position - axis0Position;
+                            const axis60000Width = axis60000Position - axis0Position;
+                            const axis70000Width = axis70000Position - axis0Position;
+                            
+                            // Set bar width based on which chart-axis-label range the bar-value falls into
+                            if (currentValue <= axisLabel50000) {
+                                // Bar value corresponds to axis-label-50000 range
+                                // Set width proportionally within 0-50000 range
+                                barWidthPx = Math.max(minWidthPx, Math.round((currentValue / axisLabel50000) * axis50000Width));
+                            } else if (currentValue <= axisLabel60000) {
+                                // Bar value corresponds to axis-label-60000 range
+                                // Set width proportionally within 50000-60000 range
+                                const rangeStart = axisLabel50000;
+                                const rangeEnd = axisLabel60000;
+                                const rangeWidth = axis60000Width - axis50000Width;
+                                const valueInRange = currentValue - rangeStart;
+                                const rangeRatio = valueInRange / (rangeEnd - rangeStart);
+                                barWidthPx = Math.max(minWidthPx, Math.round(axis50000Width + (rangeRatio * rangeWidth)));
+                            } else if (currentValue <= axisLabel70000) {
+                                // Bar value corresponds to axis-label-70000 range
+                                // Set width proportionally within 60000-70000 range
+                                const rangeStart = axisLabel60000;
+                                const rangeEnd = axisLabel70000;
+                                const rangeWidth = axis70000Width - axis60000Width;
+                                const valueInRange = currentValue - rangeStart;
+                                const rangeRatio = valueInRange / (rangeEnd - rangeStart);
+                                barWidthPx = Math.max(minWidthPx, Math.round(axis60000Width + (rangeRatio * rangeWidth)));
+                            } else {
+                                // Bar value exceeds 70,000 - extend beyond axis-label-70000
+                                const excessValue = currentValue - axisLabel70000;
+                                const excessPx = excessValue * pxPerUnit;
+                                barWidthPx = Math.max(minWidthPx, Math.round(axis70000Width + excessPx));
+                            }
+                        }
+                        
+                        // Special handling for kawasaki-bar - reduce by 5px (reduced from 10px to make it longer)
+                        const isKawasakiBar = bar && bar.classList.contains('kawasaki-bar');
+                        if (isKawasakiBar) {
+                            barWidthPx = Math.max(minWidthPx, Math.round(barWidthPx - 5));
+                        }
+                        
+                        // Special handling for yokohama-bar - increase by 10px to make it slightly longer
+                        const isYokohamaBar = bar && bar.classList.contains('yokohama-bar');
+                        if (isYokohamaBar) {
+                            barWidthPx = Math.max(minWidthPx, Math.round(barWidthPx + 10));
+                        }
+
+                    // Set uniform wrapper width for all bars to prevent overlapping
+                    wrapper.style.width = `${Math.round(uniformWrapperWidth)}px`;
+                    
+                    // Position the value element so its left edge extends beyond axis-dotted-3
+                    // and aligns to the length of the corresponding bar
+                    if (valueEl) {
+                        valueEl.style.position = 'absolute';
+                        // Calculate position based on bar width (end of bar + gap)
+                        const barEndPosition = barWidthPx + 8;
+                        // Ensure value extends beyond axis-dotted-3: use the maximum of bar end position and axis-dotted-3 position
+                        const finalPosition = Math.max(barEndPosition, valueLeftPosition);
+                        valueEl.style.left = `${Math.round(finalPosition)}px`;
+                    }
+                    if (bar) {
+                        if (animate) {
+                            bar.style.width = '0px';
+                            setTimeout(() => {
+                                bar.style.width = `${barWidthPx}px`;
+                                bar.style.transition = 'width 0.6s ease-out';
+                            }, 50);
+                        } else {
+                            bar.style.width = `${barWidthPx}px`;
+                        }
+                    }
+                    });
+                }
+
+                // Run on page load (layout only, no animation yet)
+                document.addEventListener('DOMContentLoaded', function () {
+                    calculateBarWidths(false);
+                    // Recalculate after a short delay to ensure responsive CSS has been applied
+                    setTimeout(() => {
+                        calculateBarWidths(false);
+                    }, 100);
+                });
+
+                // Position white bands to the left of the first digit
+                function positionWhiteBands() {
+                    const statValues = document.querySelectorAll('.stat-value');
+                    statValues.forEach(statValue => {
+                        //    const whiteBand = statValue.querySelector('.stat-white-band');
+                        const statNumber = statValue.querySelector('.stat-number');
+
+                        if (statNumber) {
+                            // Get the stats-bar height - set white band height to match
+                            const statsBar = statValue.closest('.stats-bar');
+                            const statsBarHeight = statsBar ? statsBar.offsetHeight : 4;
+
+                            // Set height to match stats-bar height
+                            // whiteBand.style.height = `${statsBarHeight}px`;
+
+                            // Get the position of the stat-number relative to stat-value
+                            const statValueRect = statValue.getBoundingClientRect();
+                            const statNumberRect = statNumber.getBoundingClientRect();
+
+                            // Calculate the left position of the first character ("6" in "600")
+                            // Position the band so it ends just before the number starts
+                            const numberLeft = statNumberRect.left - statValueRect.left;
+
+                            // Since the band is rotated -65deg, we need to calculate the required width
+                            // to reach the left edge of the number
+                            // For a rotated line, we calculate based on the horizontal projection
+                            const angleRad = -65 * (Math.PI / 180);
+                            // The horizontal distance covered by the rotated band
+                            // We want the band's right edge to align with the number's left edge
+                            const requiredWidth = numberLeft / Math.cos(Math.abs(angleRad));
+
+                            // Move further to the left by adding extra margin (about 8-10px equivalent)
+                            const extraMargin = 10 / Math.cos(Math.abs(angleRad));
+                            // whiteBand.style.width = `${Math.max(0, requiredWidth - extraMargin)}px`;
+                        }
+                    });
+                }
+
+                // Animate stats bar numbers
+                function animateStatsNumbers() {
+                    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+                    statNumbers.forEach((element, index) => {
+                        const target = parseInt(element.getAttribute('data-target')) || 0;
+                        setTimeout(() => {
+                            animateNumber(element, target, 900);
+                        }, 200 + (index * 100)); // 0.2s delay + staggered delays
+                    });
+                }
+
+                // Trigger stats animation when section comes into view
+                const observerOptions = {
+                    threshold: 0.3,
+                    rootMargin: '0px'
+                };
+
+                const statsObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Position white bands first
+                            positionWhiteBands();
+                            // Recalculate after a short delay to ensure numbers are rendered
+                            setTimeout(() => {
+                                positionWhiteBands();
+                            }, 50);
+                            animateStatsNumbers();
+                            statsObserver.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+
+                const statsBar = document.querySelector('.stats-bar');
+                if (statsBar) {
+                    statsObserver.observe(statsBar);
+                }
+
+                // Also position white bands on page load and resize
+                document.addEventListener('DOMContentLoaded', function () {
+                    positionWhiteBands();
+                    setTimeout(positionWhiteBands, 600);
+                });
+
+                let resizeTimeoutWhiteBand;
+                window.addEventListener('resize', function () {
+                    clearTimeout(resizeTimeoutWhiteBand);
+                    resizeTimeoutWhiteBand = setTimeout(positionWhiteBands, 600);
+                });
+
+                // Also trigger bar animations when chart comes into view
+                const chartContainer = document.querySelector('.chart-container');
+                if (chartContainer) {
+                    // Use IntersectionObserver for scroll-triggered recalculation (including initial visibility)
+                    const chartObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                setTimeout(() => {
+                                    calculateBarWidths(false);
+                                    setTimeout(() => {
+                                        calculateBarWidths(true);
+                                    }, 50);
+                                }, 100);
+                            }
+                        });
+                    }, { threshold: 0.1, rootMargin: '50px' });
+
+                    chartObserver.observe(chartContainer);
+                }
+
+                // Tokyo vs Fukuoka Comparison Section Animations (replay on enter/exit)
+                const comparisonAnimationTimers = new WeakMap();
+
+                function resetComparisonSection(section) {
+                    const timers = comparisonAnimationTimers.get(section) || [];
+                    timers.forEach((id) => clearTimeout(id));
+                    comparisonAnimationTimers.set(section, []);
+
+                    const tokyoBuilding = section.querySelector('.tokyo-building');
+                    const fukuokaBuildings = section.querySelector('.fukuoka-buildings');
+                    const tokyoPropertyCount = section.querySelector('.tokyo-box .property-count');
+                    const tokyoBoxPrice = section.querySelector('.tokyo-box .box-price');
+                    const fukuokaPropertyCount = section.querySelector('.fukuoka-box .property-count');
+                    const fukuokaBoxPrice = section.querySelector('.fukuoka-box .box-price');
+                    const conclusionLine1 = section.querySelector('.conclusion-line1');
+                    const conclusionLine2 = section.querySelector('.conclusion-line2');
+                    const conclusionLine3 = section.querySelector('.conclusion-line3');
+                    const fukuokaEmphasis = section.querySelector('.fukuoka-emphasis');
+
+                    [tokyoBuilding, fukuokaBuildings].forEach((el) => el?.classList.remove('animate-slide-in'));
+                    [tokyoPropertyCount, tokyoBoxPrice, fukuokaPropertyCount, fukuokaBoxPrice].forEach((el) =>
+                        el?.classList.remove('animate-pop-in')
+                    );
+                    conclusionLine1?.classList.remove('animate-yellow-band', 'animate-text-in');
+                    fukuokaEmphasis?.classList.remove('animate-bounce');
+                    [conclusionLine2, conclusionLine3].forEach((el) => el?.classList.remove('animate-fade-in'));
+                }
+
+                function playComparisonAnimation(section) {
+                    resetComparisonSection(section);
+                    const timers = [];
+
+                    const tokyoBuilding = section.querySelector('.tokyo-building');
+                    const fukuokaBuildings = section.querySelector('.fukuoka-buildings');
+                    const tokyoBox = section.querySelector('.tokyo-box');
+                    const fukuokaBox = section.querySelector('.fukuoka-box');
+                    const conclusionLine1 = section.querySelector('.conclusion-line1');
+                    const conclusionLine2 = section.querySelector('.conclusion-line2');
+                    const conclusionLine3 = section.querySelector('.conclusion-line3');
+
+                    const addTimer = (fn, delay) => {
+                        const id = setTimeout(fn, delay);
+                        timers.push(id);
+                    };
+
+                    if (tokyoBuilding) addTimer(() => tokyoBuilding.classList.add('animate-slide-in'), 100);
+                    if (fukuokaBuildings) addTimer(() => fukuokaBuildings.classList.add('animate-slide-in'), 150);
+
+                    if (tokyoBox) {
+                        addTimer(() => {
+                            tokyoBox.querySelector('.property-count')?.classList.add('animate-pop-in');
+                            tokyoBox.querySelector('.box-price')?.classList.add('animate-pop-in');
+                        }, 450);
+                    }
+
+                    if (fukuokaBox) {
+                        addTimer(() => {
+                            fukuokaBox.querySelector('.property-count')?.classList.add('animate-pop-in');
+                            fukuokaBox.querySelector('.box-price')?.classList.add('animate-pop-in');
+                        }, 550);
+                    }
+
+                    if (conclusionLine1) {
+                        addTimer(() => conclusionLine1.classList.add('animate-yellow-band'), 1000);
+                        addTimer(() => conclusionLine1.classList.add('animate-text-in'), 1400);
+                    }
+
+                    addTimer(() => section.querySelector('.fukuoka-emphasis')?.classList.add('animate-bounce'), 1600);
+                    addTimer(() => conclusionLine2?.classList.add('animate-fade-in'), 1550);
+                    addTimer(() => conclusionLine3?.classList.add('animate-fade-in'), 1700);
+
+                    comparisonAnimationTimers.set(section, timers);
+                }
+
+                const comparisonSection = document.querySelector('.comparison-section');
+                if (comparisonSection) {
+                    if (!('IntersectionObserver' in window)) {
+                        playComparisonAnimation(comparisonSection);
+                    } else {
+                        const comparisonObserver = new IntersectionObserver(
+                            (entries) => {
+                                entries.forEach((entry) => {
+                                    if (entry.isIntersecting) {
+                                        playComparisonAnimation(entry.target);
+                                    } else {
+                                        resetComparisonSection(entry.target);
+                                    }
+                                });
+                            },
+                            { threshold: 0.2 }
+                        );
+
+                        comparisonObserver.observe(comparisonSection);
+                    }
+                }
+
+                // Footer red header background reveal on scroll
+                const footerRedHeader = document.querySelector('.footer-red-header');
+                if (footerRedHeader) {
+                    const footerObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                footerRedHeader.classList.add('animate-bg');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, observerOptions);
+                    footerObserver.observe(footerRedHeader);
+                }
+
+                // Green shape scroll animation (top-right falls, bottom-left slides right)
+                const videoWrapper = document.querySelector('.video-wrapper');
+                const greenTop = document.querySelector('.green-shape.top-right');
+                const greenBottom = document.querySelector('.green-shape.bottom-left');
+
+                if (videoWrapper && greenTop && greenBottom) {
+                    const shapeObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                greenTop.classList.add('animate-fall');
+                                greenBottom.classList.add('animate-slide');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, observerOptions);
+
+                    shapeObserver.observe(videoWrapper);
+                }
+
+                // Video press/release control
+                const videoBackground = document.querySelector('.video-background');
+                const videoContainer = document.querySelector('.video-container');
+                const videoTextOverlay = document.querySelector('.video-text-overlay');
+                const synsLogoOverlay = document.querySelector('.syns-logo-overlay');
+                const greenShapeTop = document.querySelector('.green-shape.top-right');
+                const greenShapeBottom = document.querySelector('.green-shape.bottom-left');
+                const playButtonContainer = document.querySelector('.play-button-container');
+                const playButton = document.querySelector('.play-button');
+                const playIcon = document.querySelector('.play-icon');
+                const pauseIcon = document.querySelector('.pause-icon');
+
+                if (videoBackground && videoContainer) {
+                    let isPlaying = false;
+                    let hideButtonTimeout = null;
+                    let mouseMoveTimeout = null;
+                    let isMouseMoving = false;
+
+                    function showPlayButton() {
+                        if (playButtonContainer) {
+                            playButtonContainer.classList.remove('hidden');
+                            playButtonContainer.classList.add('visible');
+                        }
+                    }
+
+                    function hidePlayButton() {
+                        if (playButtonContainer) {
+                            playButtonContainer.classList.remove('visible');
+                            playButtonContainer.classList.add('hidden');
+                        }
+                    }
+
+                    function updateButtonIcon(playing) {
+                        if (playIcon && pauseIcon) {
+                            if (playing) {
+                                playIcon.style.display = 'none';
+                                pauseIcon.style.display = 'block';
+                            } else {
+                                playIcon.style.display = 'block';
+                                pauseIcon.style.display = 'none';
+                            }
+                        }
+                    }
+
+                    function resetHideTimer() {
+                        // Clear existing timeout
+                        if (hideButtonTimeout) {
+                            clearTimeout(hideButtonTimeout);
+                        }
+                        
+                        // Show button
+                        showPlayButton();
+                        
+                        // Set timeout to hide after 4 seconds if mouse stops moving
+                        hideButtonTimeout = setTimeout(function() {
+                            if (!isMouseMoving && isPlaying) {
+                                hidePlayButton();
+                            }
+                        }, 4000);
+                    }
+
+                    function handleMouseMove() {
+                        isMouseMoving = true;
+                        
+                        // Clear existing timeout
+                        if (mouseMoveTimeout) {
+                            clearTimeout(mouseMoveTimeout);
+                        }
+                        
+                        // Show button when mouse moves
+                        if (isPlaying) {
+                            showPlayButton();
+                            resetHideTimer();
+                        }
+                        
+                        // Set timeout to mark mouse as stopped
+                        mouseMoveTimeout = setTimeout(function() {
+                            isMouseMoving = false;
+                        }, 100);
+                    }
+
+                    function toggleVideo() {
+                        if (videoBackground.paused) {
+                            // Set volume to 1 (full volume) to ensure sound plays
+                            videoBackground.volume = 1;
+                            // Play video
+                            videoBackground.play().catch(err => console.log('Video play error:', err));
+                            isPlaying = true;
+                            
+                            // Update button icon to pause
+                            updateButtonIcon(true);
+                            
+                            // Show button and set timer
+                            resetHideTimer();
+                            
+                            // Hide overlays
+                            if (greenShapeTop) {
+                                greenShapeTop.classList.remove('show');
+                                greenShapeTop.classList.add('hide');
+                            }
+                            if (greenShapeBottom) {
+                                greenShapeBottom.classList.remove('show');
+                                greenShapeBottom.classList.add('hide');
+                            }
+                            if (videoTextOverlay) {
+                                videoTextOverlay.classList.remove('show');
+                                videoTextOverlay.classList.add('hide');
+                            }
+                            if (synsLogoOverlay) {
+                                synsLogoOverlay.classList.remove('show');
+                                synsLogoOverlay.classList.add('hide');
+                            }
+                        } else {
+                            // Pause video
+                            videoBackground.pause();
+                            isPlaying = false;
+                            
+                            // Update button icon to play
+                            updateButtonIcon(false);
+                            
+                            // Show button (always visible when paused)
+                            showPlayButton();
+                            
+                            // Clear hide timer
+                            if (hideButtonTimeout) {
+                                clearTimeout(hideButtonTimeout);
+                            }
+                            
+                            // Show overlays
+                            if (greenShapeTop) {
+                                greenShapeTop.classList.remove('hide');
+                                greenShapeTop.classList.add('show');
+                            }
+                            if (greenShapeBottom) {
+                                greenShapeBottom.classList.remove('hide');
+                                greenShapeBottom.classList.add('show');
+                            }
+                            if (videoTextOverlay) {
+                                videoTextOverlay.classList.remove('hide');
+                                videoTextOverlay.classList.add('show');
+                            }
+                            if (synsLogoOverlay) {
+                                synsLogoOverlay.classList.remove('hide');
+                                synsLogoOverlay.classList.add('show');
+                            }
+                        }
+                    }
+
+                    // Click event to toggle play/pause
+                    videoContainer.addEventListener('click', toggleVideo);
+                    
+                    // Also allow clicking the play button itself
+                    if (playButton) {
+                        playButton.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            toggleVideo();
+                        });
+                    }
+
+                    // Mouse movement tracking
+                    videoContainer.addEventListener('mousemove', handleMouseMove);
+                    videoContainer.addEventListener('mouseenter', function() {
+                        if (isPlaying) {
+                            showPlayButton();
+                            resetHideTimer();
+                        }
+                    });
+                }
+
+                // Recalculate on window resize for responsive layouts
+                let resizeTimeout;
+                window.addEventListener('resize', function () {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(calculateBarWidths, 150);
+                });
+
+                // Landing section scroll behavior
+                let landingAnimationsComplete = false;
+                const landingSection = document.querySelector('.landing-section');
+
+                // Check if animations are complete (after ~3.5s)
+                setTimeout(function () {
+                    landingAnimationsComplete = true;
+                    // Allow scrolling after animations
+                    if (landingSection) {
+                        landingSection.style.overflow = 'hidden';
+                    }
+                }, 3500);
+
+                // Handle scroll to normal content
+                window.addEventListener('scroll', function () {
+                    if (landingAnimationsComplete && landingSection) {
+                        const scrollY = window.scrollY;
+                        if (scrollY > 50) {
+                            // User is scrolling - animations can fade out if needed
+                            landingSection.style.pointerEvents = 'auto';
+                        }
+                    }
+                });
