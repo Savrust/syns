@@ -9416,6 +9416,15 @@ x, and city-label rank-first display in one line at exactly 425px */
     }
 }
 @media (max-width : 768px) and (min-width : 500px){
+    .date-box {
+        border: 2px solid #315f41;
+        padding: 4px 12px;
+        background-color: #fff;
+        width: 40%;
+        text-align: center;
+        margin: auto;
+        white-space: nowrap;
+    }
     .guarantee-text{
         bottom: 20px;
         left: 20px;
