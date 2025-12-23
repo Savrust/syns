@@ -5541,7 +5541,7 @@ x, and city-label rank-first display in one line at exactly 425px */
 }
 
 .banner-text-green {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 900;
     color: #2d5a3d;
     line-height: 1;
@@ -5566,6 +5566,7 @@ x, and city-label rank-first display in one line at exactly 425px */
 
 .banner-text-red.animate-drop {
     animation: bannerTextDrop 0.8s ease-out forwards;
+    padding-bottom: 6px;
 }
 
 @keyframes bannerTextDrop {
