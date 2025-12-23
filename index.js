@@ -123,7 +123,7 @@
                                 savings: 20.42
                             },
                             comparison2: {
-                                header: '不動産 13件所有 / 家賃収入 185.24万円',
+                                header: '不動産3件所有 / 家賃収入 185.24万円',
                                 beforeTax: 1860,
                                 afterTax: 96,
                                 realEstateIncome: -1762,
@@ -151,7 +151,7 @@
                                 savings: 24.52
                             },
                             comparison2: {
-                                header: '不動産 13件所有 / 家賃収入 185.24万円',
+                                header: '不動産3件所有 / 家賃収入 185.24万円',
                                 beforeTax: 296,
                                 afterTax: 35.6,
                                 realEstateIncome: -260.4,
@@ -179,7 +179,7 @@
                                 savings: 38.26
                             },
                             comparison2: {
-                                header: '不動産 13件所有 / 家賃収入 185.24万円',
+                                header: '不動産3件所有 / 家賃収入 185.24万円',
                                 beforeTax: 451,
                                 afterTax: 43.1,
                                 realEstateIncome: -407.89,
@@ -207,7 +207,7 @@
                                 savings: 42.31
                             },
                             comparison2: {
-                                header: '不動産 13件所有 / 家賃収入 185.24万円',
+                                header: '不動産3件所有 / 家賃収入 185.24万円',
                                 beforeTax: 803,
                                 afterTax: 0.7,
                                 realEstateIncome: -802.27,
@@ -235,7 +235,7 @@
                                 savings: 60
                             },
                             comparison2: {
-                                header: '不動産 13件所有 / 家賃収入 185.24万円',
+                                header: '不動産3件所有 / 家賃収入 185.24万円',
                                 beforeTax: 1860,
                                 afterTax: 96,
                                 realEstateIncome: -1762,

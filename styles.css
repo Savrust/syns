@@ -4317,7 +4317,7 @@ x, and city-label rank-first display in one line at exactly 425px */
     color: #FFEB3B;
     font-size: 28px;
     font-weight: 900;
-    margin-left: 12px;
+    /* margin-left: 12px; */
     letter-spacing: 1px;
 }
 
