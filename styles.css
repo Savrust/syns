@@ -1405,6 +1405,7 @@ body {
     line-height: 1;
     display: flex;
     align-items: center;
+    min-width: 55px;
 }
 
 /* Play Button */
@@ -1718,9 +1719,9 @@ body {
     white-space: nowrap;
 }
 
-.axis-label-50000 { left: clamp(60px, 20vw, 90px); } /* Matches axis-dotted-1 */
+.axis-label-50000 { left: clamp(60px, 19vw, 90px); } /* Matches axis-dotted-1 */
 .axis-label-60000 { left: clamp(100px, 28vw, 130px); } /* Matches axis-dotted-2 */
-.axis-label-70000 { left: clamp(120px, 36vw, 170px); } /* Matches axis-dotted-3 */
+.axis-label-70000 { left: clamp(120px, 37vw, 170px); } /* Matches axis-dotted-3 */
 .axis-label-0 {
     transform: translate(-88%, 0);
 }
@@ -1873,6 +1874,7 @@ body {
     flex-shrink: 0;
     z-index: 3;
     position: relative;
+    padding-left: 5px;
 }
 .winner-bar-value { 
     font-size: clamp(24px, 4.5vw, 18px);
@@ -3054,9 +3056,9 @@ iframe {
     margin-top: 4px;
     width: 100%;
 }
-.display-none-425{
+/* .display-none-425{
     display: none;
-}
+} */
 .key-points-conclusion p {
     font-size: clamp(4px, 2.5vw, 8px);
     color: #e9474f;
@@ -7583,6 +7585,9 @@ x, and city-label rank-first display in one line at exactly 425px */
     .building-images {
         height: 100px;
     }
+    .property-illustration{
+        width: 40vw;
+    }
 }
 
 @media (max-width: 480px) {
@@ -7647,6 +7652,12 @@ x, and city-label rank-first display in one line at exactly 425px */
 }
 
 @media (max-width : 2000px) and (min-width : 1300px){
+    .key-points-column{
+        margin-top: 50px;
+    }
+    .property-illustration{
+        width: 30vw;
+    }
     .content-overlay{
         width: 40%;
         max-width: 50%;
@@ -7951,7 +7962,7 @@ x, and city-label rank-first display in one line at exactly 425px */
         font-size: 40px;
 
     }
-    
+   
     .yield-title {
         font-size: 40px;
     }
@@ -7962,14 +7973,14 @@ x, and city-label rank-first display in one line at exactly 425px */
         font-size:30px;
     }
     .key-points-label{
-        font-size: 22px;
+        font-size: 36px;
         padding: 10px 4px;
     }
     .key-points-title{
-        font-size: 20px;
+        font-size: 28px !important;
     }
     .key-points-subtitle{
-        font-size: 20px;
+        font-size: 28px;
     }
     .key-points-conclusion p{
         font-size: 20px;
@@ -8564,7 +8575,9 @@ x, and city-label rank-first display in one line at exactly 425px */
         font-size: 40px;
 
     }
-    
+    .display-flex-425{
+        padding-top: 10px !important;
+    }
     .yield-title {
         font-size: 40px;
     }
@@ -9177,7 +9190,7 @@ x, and city-label rank-first display in one line at exactly 425px */
         font-size: 15px;
     }
     .key-points-conclusion p{
-        font-size: 15px;
+        font-size: 28px;
     }
     .explanation-text{
         font-size: 25px;
@@ -10176,9 +10189,9 @@ x, and city-label rank-first display in one line at exactly 425px */
     .axis-dotted-1 { left: clamp(130px, 20vw, 90px); } /* 50,000 mapped within 70,000 span - increased spacing from chart-axis */
     .axis-dotted-2 { left: clamp(250px, 28vw, 130px); } /* 60,000 mapped within 70,000 span - midpoint */
     .axis-dotted-3 { left: clamp(370px, 36vw, 170px); } /* 70,000 endpoint */
-    .axis-label-50000 { left: clamp(130px, 20vw, 90px); } /* Matches axis-dotted-1 */
+    .axis-label-50000 { left: clamp(130px, 19vw, 90px); } /* Matches axis-dotted-1 */
     .axis-label-60000 { left: clamp(250px, 28vw, 130px); } /* Matches axis-dotted-2 */
-    .axis-label-70000 { left: clamp(370px, 36vw, 170px); } /* Matches axis-dotted-3 */
+    .axis-label-70000 { left: clamp(370px, 37vw, 170px); } /* Matches axis-dotted-3 */
     .chart-axis-label{
         top: -36px;
     }
@@ -10437,4 +10450,8 @@ x, and city-label rank-first display in one line at exactly 425px */
 }
 .yellow-bg-text{
     font-size: 16px;
+}
+.display-flex-425{
+    display: flex;
+    justify-content: space-around;
 }
