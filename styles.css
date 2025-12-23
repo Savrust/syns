@@ -5598,6 +5598,9 @@ x, and city-label rank-first display in one line at exactly 425px */
     position: relative;
     margin-top: 0;
     margin-bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    /* height: 300px; */
 }
 
 .promo-header-image {
@@ -5606,7 +5609,9 @@ x, and city-label rank-first display in one line at exactly 425px */
     display: block;
     object-fit: contain;
 }
-
+.promo-header-svg{
+    width: 40%;
+}
 .promo-title-container {
     text-align: center;
     margin-bottom: 24px;
@@ -7754,7 +7759,9 @@ x, and city-label rank-first display in one line at exactly 425px */
         font-size: 40px;
       
     }
-    
+    .promo-header-svg{
+        height: 40%;
+    }
     /* Chart Container */
     .chart-container {
         margin-top: 20px;
