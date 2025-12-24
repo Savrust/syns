@@ -2494,7 +2494,9 @@ body {
     transform: translateY(-10px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-
+.conclusion-line2.animate-fade-in{
+    padding: 5px 0px;
+}
 .conclusion-line1.animate-text-in {
     opacity: 1;
     transform: translateY(0);
@@ -2528,7 +2530,7 @@ body {
     bottom: 2px;
     left: 0;
     width: 0;
-    height: 2px;
+    height: 1px;
     background-color: #ffef92;
     z-index: -1;
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -2544,7 +2546,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 5px;
+    height: 3px;
     background-color: #ffef92;
     z-index: -1;
 }
@@ -7952,7 +7954,7 @@ x, and city-label rank-first display in one line at exactly 425px */
         font-size: 30px;
     }
     .highlight-orange{
-        font-size: 30px;
+        font-size: 3.5rem;
     }
     .comparison-badge{
         left: 53%;
