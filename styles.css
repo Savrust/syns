@@ -1354,7 +1354,7 @@ body {
 /* SYNS Logo Overlay */
 .syns-logo-overlay {
     position: absolute;
-    bottom: 20px;
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -1396,7 +1396,7 @@ body {
     background-color: #fff;
     opacity: 0.8;
     align-self: center;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .syns-phonetic {
@@ -10300,6 +10300,9 @@ x, and city-label rank-first display in one line at exactly 425px */
     .display-show-425{
         display: none;
     }
+    .syns-logo-overlay{
+        bottom: 20px;
+    }
     .guarantee-illustration{
         margin-bottom: 40px;
     }
@@ -10334,10 +10337,13 @@ x, and city-label rank-first display in one line at exactly 425px */
     .winner-bar-value{
         font-size: 16px;
     }
+    .logo-image-video{
+        min-width: 120px;
+    }
     .separator-line{
         margin-top: 3px;
         width: 2px;
-        height: 27px;
+        height: 25px;
     }
     .section-title{
         /* font-size: 13px; */
@@ -10505,4 +10511,7 @@ x, and city-label rank-first display in one line at exactly 425px */
         -1px  1px 0 #fff,
          1px  1px 0 #fff,
          0px  0px 1px #fff;
+}
+.logo-image-video{
+    width: 300px;
 }
