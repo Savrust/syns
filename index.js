@@ -708,12 +708,20 @@
 
                     // Prefer explicit target if provided (for example: rate-value should always end at 93.64)
                     const dataTarget = element.getAttribute('data-target');
+                    let suffix = '';
+                    
+                    // Extract suffix from currentText by finding the numeric part
+                    const currentTextMatch = currentText.match(/([\d,.]+)/);
+                    if (currentTextMatch) {
+                        const matchEnd = currentTextMatch.index + currentTextMatch[0].length;
+                        suffix = currentText.slice(matchEnd).trim();
+                    }
+                    
                     const cleaned = (dataTarget ?? currentText).replace(/,/g, '');
                     const match = cleaned.match(/([\d.]+)/);
                     if (!match) return;
 
                     const numberPart = match[1];
-                    const suffix = currentText.slice(currentText.indexOf(numberPart) + numberPart.length);
                     const decimals = (numberPart.split('.')[1] || '').length;
                     const target = parseFloat(numberPart);
                     if (!isFinite(target)) return;
@@ -734,11 +742,7 @@
                             element.textContent = current.toFixed(decimals) + suffix;
                         } else {
                             const intValue = Math.round(current);
-                            if (element.classList.contains('total-amount')) {
-                                element.textContent = intValue.toString() + suffix;
-                            } else {
-                                element.textContent = intValue.toLocaleString() + suffix;
-                            }
+                            element.textContent = intValue.toLocaleString() + suffix;
                         }
 
                         if (progress < 1) {
