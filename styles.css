@@ -10315,7 +10315,7 @@ x, and city-label rank-first display in one line at exactly 425px */
         font-weight: 600;
     }
     .price-amount {
-        font-size: clamp(48px, 18vw, 80px);
+        font-size: 80px;
         font-weight: 900;
         color: #2d5a3d;
         line-height: 1;
@@ -10472,7 +10472,7 @@ x, and city-label rank-first display in one line at exactly 425px */
         border: 2px solid #315f41;
         padding: 4px 12px;
         background-color: #fff;
-        width: 60%;
+        width: 180px;
         text-align: center;
         margin: auto;
         white-space: nowrap;
