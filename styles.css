@@ -6409,6 +6409,7 @@ x, and city-label rank-first display in one line at exactly 425px */
 .cell-uint{
     font-size: 12px;
     color: #2c211e;
+    /* margin-top:2px; */
 }
 .cell-breakdown {
     margin-top: 12px;
@@ -6550,7 +6551,7 @@ x, and city-label rank-first display in one line at exactly 425px */
 .savings-amount {
     color: #10502b;
     font-weight: 900;
-    font-size: 12px;
+    /* font-size: 12px; */
     background-color: #f9f3c5;
 }
 .savings-amount-text {
