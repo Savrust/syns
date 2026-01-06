@@ -15,7 +15,10 @@
                             const cardWidth = cards[0].offsetWidth;
                             const gap = 12;
                             const scrollLeft = scrollWrapper.scrollLeft;
-                            const currentIndex = Math.round(scrollLeft / (cardWidth + gap));
+                            // const currentIndex = Math.round(scrollLeft / (cardWidth + gap));
+                            const currentIndex = Math.floor(
+                                (scrollLeft + (cardWidth / 2)) / (cardWidth + gap)
+                            );
                             const activeIndex = Math.min(currentIndex, cards.length - 1);
 
                             paginationDots.forEach((dot, index) => {
@@ -27,6 +30,13 @@
                             });
                         }
 
+                        // Force initial position
+                        requestAnimationFrame(() => {
+                            scrollWrapper.scrollLeft = 0;
+                            updateActiveDot();
+                            updateNavVisibility();
+                        });
+                        
                         function updateNavVisibility() {
                             if (!scrollWrapper || !prevButton || !nextButton) return;
                             const maxScroll = scrollWrapper.scrollWidth - scrollWrapper.clientWidth;
@@ -63,10 +73,10 @@
                         });
 
                         // Update pagination after smooth scroll completes
-                        scrollWrapper.addEventListener('scrollend', () => {
-                            updateActiveDot();
-                            updateNavVisibility();
-                        });
+                        // scrollWrapper.addEventListener('scrollend', () => {
+                        //     updateActiveDot();
+                        //     updateNavVisibility();
+                        // });
 
                         function scrollToNext() {
                             const cardWidth = cards[0].offsetWidth;
@@ -99,6 +109,7 @@
                     }
                 });
 
+                
                 // Income List click functionality
                 document.addEventListener('DOMContentLoaded', function () {
                     const incomeItems = document.querySelectorAll('.income-item');
@@ -295,11 +306,11 @@
                                         <div class="table-label">課税対象額</div>
                                         <div class="table-cell">
                                             <div class="cell-label cell-title"><span class="auto">購入前</span></div>
-                                            <div class="cell-value"><span class="cell-uint">約 </span>${data.comparison1.beforeTax}<span class="cell-uint">万円</span></div>
+                                            <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison1.beforeTax}<span class="cell-uint">万円</span></div>
                                         </div>
                                         <div class="table-cell cell-after">
                                             <div class="cell-label cell-title"><span class="auto">購入後</span></div>
-                                            <div class="cell-value"><span class="cell-uint">約 </span>${data.comparison1.afterTax}<span class="cell-uint">万円</span></div>
+                                            <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison1.afterTax}<span class="cell-uint margin-top-425">万円</span></div>
                                             <div class="cell-breakdown">
                                                 <div class="breakdown-item">
                                                     <span class="breakdown-label">不動産所得</span>
@@ -329,10 +340,10 @@
                                     <div class="table-row">
                                         <div class="table-label">所得税 住民税 合計</div>
                                         <div class="table-cell">
-                                            <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison1.beforeTaxTotal}<span class="cell-uint">万円</span></div>
+                                            <div class="cell-value auto"><span class="cell-uint">約 </span><span>${data.comparison1.beforeTaxTotal}</span><span class="cell-uint">万円</span></div>
                                         </div>
                                         <div class="table-cell cell-after">
-                                            <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison1.afterTaxTotal}<span class="cell-uint">万円</span></div>
+                                            <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison1.afterTaxTotal}<span class="cell-uint margin-top-425">万円</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -364,11 +375,11 @@
                                             <div class="table-label">課税対象額</div>
                                             <div class="table-cell">
                                                 <div class="cell-label cell-title"><span class="auto">購入前</span></div>
-                                                <div class="cell-value"><span class="cell-uint">約 </span>${data.comparison2.beforeTax}<span class="cell-uint">万円</span></div>
+                                                <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison2.beforeTax}<span class="cell-uint">万円</span></div>
                                             </div>
                                             <div class="table-cell cell-after">
                                                 <div class="cell-label cell-title"><span class="auto">購入後</span></div>
-                                                <div class="cell-value"><span class="cell-uint">約 </span>${data.comparison2.afterTax}<span class="cell-uint">万円</span></div>
+                                                <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison2.afterTax}<span class="cell-uint margin-top-425">万円</span></div>
                                                 <div class="cell-breakdown">
                                                     <div class="breakdown-item">
                                                         <span class="breakdown-label">不動産所得</span>
@@ -399,7 +410,7 @@
                                                 <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison2.beforeTaxTotal}<span class="cell-uint">万円</span></div>
                                             </div>
                                             <div class="table-cell cell-after">
-                                                <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison2.afterTaxTotal}<span class="cell-uint">万円</span></div>
+                                                <div class="cell-value auto"><span class="cell-uint">約 </span>${data.comparison2.afterTaxTotal}<span class="cell-uint margin-top-425">万円</span></div>
                                             </div>
                                         </div>
                                     </div>

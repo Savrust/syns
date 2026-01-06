@@ -1603,7 +1603,7 @@ body {
     transform: translateY(-50%);
 }
 .rank-first{
-    font-size: clamp(14px, 4.5vw, 18px);
+    /* font-size: clamp(14px, 4.5vw, 18px); */
     font-weight: bold;
     color: rgb(83,148,82) !important;
 }
@@ -1627,7 +1627,7 @@ body {
     max-width: 30vw;
     display: flex;
     flex-direction: column;
-    gap: 4px; /* Match chart-bars-right gap */
+    gap: 7px; /* Match chart-bars-right gap */
     justify-content: flex-start;
     padding-top: 7px; /* Match chart-bars-right padding-top */
 }
@@ -1747,7 +1747,7 @@ body {
     gap: 7px;
     min-width: 80px;
     width: 100%;
-    font-size: clamp(9px, 2.75vw, 11px);
+    /* font-size: clamp(9px, 2.75vw, 11px); */
     text-align: center;
 }
 
@@ -2338,6 +2338,7 @@ body {
 }
 
 .box-price.animate-pop-in {
+    padding-top: 3px;
     transform: scale(1);
     opacity: 1;
 }
@@ -5383,7 +5384,7 @@ x, and city-label rank-first display in one line at exactly 425px */
     border: 2px solid #E0E0E0;
     padding: 24px 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    scroll-snap-align: center;
+    scroll-snap-align: start;
 }
 
 /* Customer Profile */
@@ -7834,7 +7835,7 @@ x, and city-label rank-first display in one line at exactly 425px */
     }
     
     .chart-bars-left{
-        gap: 4px; /* Match chart-bars-right gap */
+        gap: 6px; /* Match chart-bars-right gap */
         padding-top: 7px; /* Match chart-bars-right padding-top */
     }
     .bar-value{
@@ -8458,7 +8459,7 @@ x, and city-label rank-first display in one line at exactly 425px */
     }
     
     .chart-bars-left{
-        gap: 4px; /* Match chart-bars-right gap */
+        gap: 6px; /* Match chart-bars-right gap */
         padding-top: 7px; /* Match chart-bars-right padding-top */
     }
     .chart-bars-right {
@@ -9690,7 +9691,7 @@ x, and city-label rank-first display in one line at exactly 425px */
     }
     
     .chart-bars-left{
-        gap: 4px; /* Match chart-bars-right gap */
+        gap: 6px; /* Match chart-bars-right gap */
         padding-top: 7px; /* Match chart-bars-right padding-top */
     }
     .chart-bars-right {
@@ -9722,9 +9723,9 @@ x, and city-label rank-first display in one line at exactly 425px */
         min-height: 22px;
     }
 
-    .city-name.rank-first {
+    /* .city-name.rank-first {
         font-size: 21px;
-    }
+    } */
     .rank, .city-label{
         font-size: 15px;
     }
@@ -10258,7 +10259,12 @@ x, and city-label rank-first display in one line at exactly 425px */
     }
 }
 @media (max-width: 425px) {
-    
+    .margin-top-425{
+        margin-top:2px;
+    }
+    .city-label{
+        gap:4px;
+    }
     .building-right{
         width: 100px !important;
     }
@@ -10520,4 +10526,9 @@ x, and city-label rank-first display in one line at exactly 425px */
 }
 .logo-image-video{
     width: 300px;
+}
+@media (max-width: 396px) {
+    .winner-bar-value{
+        left: 134px !important;
+    }
 }
