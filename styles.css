@@ -9545,6 +9545,11 @@ x, and city-label rank-first display in one line at exactly 425px */
         font-size: 35px;
     }
 }
+@media (max-width : 500px) and (min-width : 425px){
+    .date-box {
+        width: 200px;
+    }
+}
 @media (max-width : 768px) and (min-width : 500px){
     .date-box {
         border: 2px solid #315f41;
