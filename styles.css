@@ -10297,6 +10297,9 @@ x, and city-label rank-first display in one line at exactly 425px */
     /* .display-flex-425>div{
         width: 45%;
     } */
+    .kingcat-icon{
+        margin-bottom:2px;
+    }
     .key-points-conclusion{
         padding: 6px;
     }
