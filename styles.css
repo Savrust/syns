@@ -6947,7 +6947,7 @@ x, and city-label rank-first display in one line at exactly 425px */
     width: auto;
     height: auto;
     max-width: 80px;
-    max-height: 16px;
+    max-height: 20px;
     display: block;
     
 }
@@ -8084,7 +8084,10 @@ x, and city-label rank-first display in one line at exactly 425px */
         height: 100%;
         font-size: 40px;
     }
-    
+    .footer-amazon-image{
+        max-width: 94px;
+        max-height: 30px;
+    }
     .guarantee-title {
         font-size: 35px;
     }
