@@ -432,7 +432,7 @@ body {
 /* Red Promotional Banner */
 .new-hero-red-banner {
     background-color: #d71e1b;
-    padding: 10px 16px;
+    /* padding: 10px 16px; */
     padding-top: 5px;
     display: flex;
     flex-direction: column;
@@ -1115,6 +1115,7 @@ body {
     width: 100%;
     position: relative;
     z-index: 1;
+    background:#f2eeeb;
 }
 
 .intro-text {
@@ -6809,9 +6810,6 @@ x, and city-label rank-first display in one line at exactly 425px */
 
 /* Red Header Section */
 .footer-red-header {
-    background-color: #d71e1b;
-    padding: 10px 16px;
-    padding-top: 5px;
     display: flex;
     flex-direction: column;
     gap: 0px;
@@ -6857,6 +6855,9 @@ x, and city-label rank-first display in one line at exactly 425px */
     margin: 0;
     white-space: wrap;
     letter-spacing: -0.3px;
+    background: #d71e1b;
+    width: 100%;
+    padding: 5px 16px;
 }
 
 .footer-banner-buttons {
@@ -6864,6 +6865,8 @@ x, and city-label rank-first display in one line at exactly 425px */
     gap: 12px;
     width: 100%;
     justify-content: center;
+    padding: 10px 16px;
+    background: white;
 }
 
 .footer-interview-button {
@@ -6891,8 +6894,6 @@ x, and city-label rank-first display in one line at exactly 425px */
     align-items: center;
     justify-content: center;
     min-height: 48px;
-    border: 2px solid #E60012;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     background-color: #fff;
     padding: 16px;
@@ -6906,10 +6907,10 @@ x, and city-label rank-first display in one line at exactly 425px */
     min-height: 48px;
 }
 
-.footer-amazon-button:hover {
+/* .footer-amazon-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
+} */
 
 .footer-interview-button:hover {
     transform: scale(1.02);
@@ -6956,10 +6957,11 @@ x, and city-label rank-first display in one line at exactly 425px */
     border: 2px solid #E60012;
     justify-content: space-between;
     padding: 12px 16px;
+    background: #d71e1b;
 }
 
 .footer-button-text {
-    color: #E60012;
+    color: white;
     font-weight: 700;
     font-size: 24px;
     flex: 1;
@@ -6970,12 +6972,13 @@ x, and city-label rank-first display in one line at exactly 425px */
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #d71e1b;
 }
 
 .footer-play-circle {
     width: 24px;
     height: 24px;
-    background-color: #E60012;
+    background: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -6985,7 +6988,7 @@ x, and city-label rank-first display in one line at exactly 425px */
 .footer-play-triangle {
     width: 0;
     height: 0;
-    border-left: 8px solid #fff;
+    border-left: 8px solid red;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     margin-left: 2px;
@@ -7468,7 +7471,7 @@ x, and city-label rank-first display in one line at exactly 425px */
     
     /* Footer */
     .footer-red-header {
-        padding: 32px 40px;
+        /* padding: 32px 40px; */
     }
     
     .footer-dark-section {
@@ -7702,10 +7705,11 @@ x, and city-label rank-first display in one line at exactly 425px */
         place-content: center;
     }
     .footer-banner-buttons{
-        width: 100%;
+        /* width: 100%; */
+        padding: 30px 200px;
     }
-    .footer-red-header{
-        padding: 30px;
+    .new-hero-red-banner .footer-banner-buttons{
+        padding: 10px 16px;
     }
     .footer-banner-text-bold {
         font-size: 16px;
@@ -8114,8 +8118,8 @@ x, and city-label rank-first display in one line at exactly 425px */
         font-size: 30px;
     }
     .footer-red-header{
-        padding-left: 200px;
-        padding-right: 200px;
+        /* padding-left: 200px; */
+        /* padding-right: 200px; */
     }
     .banner-text-financing {
         font-size: 40px;
@@ -8355,10 +8359,11 @@ x, and city-label rank-first display in one line at exactly 425px */
         place-content: center;
     }
     .footer-banner-buttons{
-        width: 40%;
+        /* width: 40%; */
+        padding: 15px 60px;
     }
     .footer-red-header{
-        padding: 30px;
+        /* padding: 30px; */
     }
     .footer-banner-text-bold {
         font-size: 16px;
@@ -8949,10 +8954,11 @@ x, and city-label rank-first display in one line at exactly 425px */
         place-content: center;
     }
     .footer-banner-buttons{
-        width: 60%;
+        /* width: 60%; */
+        padding: 10px 40px;
     }
     .footer-red-header{
-        padding: 30px;
+        /* padding: 30px; */
     }
     .footer-banner-text-bold {
         font-size: 16px;
@@ -9587,10 +9593,14 @@ x, and city-label rank-first display in one line at exactly 425px */
         place-content: center;
     }
     .footer-banner-buttons{
-        width: 80%;
+        /* width: 80%; */
+        padding: 10px 20px;
     }
     .footer-red-header{
-        padding: 20px;
+        /* padding: 20px; */
+    }
+    .footer-banner-text{
+        padding: 5px 20px;
     }
     .footer-banner-text-bold {
         font-size: 16px;
